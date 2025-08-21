@@ -1,0 +1,194 @@
+Admin screen
+
+POST /admin/socity
+        {
+            "name":"Akash Reddy",
+            "contact_number":"12345",
+            "address":"lbnagar"
+        }
+
+GET  /admin/socity
+        [
+            {
+                "id": 1,
+                "name": "Akash Reddy",
+                "contact_number": "1234",
+                "address": "lbnagar"
+            }
+        ]
+
+
+        //inserted in member n commitee member
+POST /members
+        {
+            "salutations":"Mrs",
+            "name": "Anu ",
+            "contact_number": "1234",
+            "dob":"1995-01-02",
+            "owner":true,
+            "flatno":"123",
+            "email":"abc",
+            "validated_by": 000,// only when it comes from socity screen
+            "duration_period" : 24, // only when it comes from socity screen
+            "society_id":89,
+            "commitee_member":true,
+            "user_name":"trishala",
+            "password":"trishala",
+            
+        }
+
+GET /members?status=0 //0 means unapproved1 means approved
+       [
+        {
+            "id":123,
+            "salutations":"Mrs",
+            "name": "Anu ",
+            "contact_number": "1234",
+            "dob":"1995-01-02",
+            "owner":true,
+            "flatno":"123",
+            "email":"abc",
+            "validated_by": null,
+           
+        }
+       ]
+
+PUT /members
+       {
+        "member_updated":[{
+                "id":123,
+                "commitee_member":true,
+                "duration":2
+            }
+        ],
+        "validated_by":123
+       }
+
+POST /incident
+       {
+        "member_id":123,
+        "description":"pipe not working",
+       }
+
+GET /incident?member_id=123
+    [{
+        "indicent_id":123,
+        "member_id":123,
+        "description":"pipe not working",
+        "comments":"issue resoleved",
+        "created_date":"2024-02-02",
+        "status":"RESOLVED/INPROGRESS/UNRESOLVED/DECLINED",
+        "commitee_member_id":345
+    }]
+
+PUT /incident
+        {
+            "indicent_id":123,
+            "commitee_member_id":345,
+            "comments":"issue resoleved",
+            "status":"RESOLVED/INPROGRESS/UNRESOLVED",
+        }
+
+
+POST /notices
+        {
+            "commitee_member_id":345,
+            "content":"Meeting at 12",
+            "title":"MEETING",
+            "valid_till":"2024-03-04",
+            "priority":1
+        }
+
+GET /notices
+        [{
+            "id":1234,
+            "commitee_member_id":345,
+            "content":"Meeting at 12",
+            "title":"MEETING",
+            "valid_till":"2024-03-04",
+            "priority":1
+        }]
+
+POST /donations 
+        {
+            "member_id":345,
+            "purpose":"functions",
+            "payment_method":"Cash",
+            "amount":100
+        }
+
+
+POST /poll
+        {
+            "commitee_member_id":123,
+            "questions":"When is meeting?",
+            "answers":[
+                "12 am tomorow",
+                "2 am tomorow",
+                "3 am tomorow"
+            ],
+            "status":"ACTIVE/INACIVE"
+        }
+
+GET /poll?status=ACTIVE
+        [{
+            "commitee_member_id":123,
+            "question_id":1,
+            "questions":"When is meeting?",
+            "answers":[
+            {"text":"12 am tomorow",
+                "answer_id":1,
+                "votes":23
+            }
+            {"text":"1 am tomorow",
+                "answer_id":2,"votes":23
+            },
+            {"text":"2 am tomorow",
+                "answer_id":3,"votes":23
+            }
+            ],
+            "status":"ACTIVE/INACIVE"
+        }]
+
+PUT /poll
+        {
+            "member_id":123,
+            "answer_id":234,
+        }
+
+
+POST /records
+        {
+          "commite_member_id" :1,
+          "payment_method":"CASH",
+          "amount":100,
+          "description":"salary for watchman"
+        }
+
+GET /records
+        [{
+            "id":123,
+          "commite_member_id" :124,
+          "payment_method":"CASH",
+          "amount":100,
+          "description":"salary for watchman",
+          "created_at":"2024-09-09"
+        }]
+
+POST /maintance
+            { 
+                "commite_member_id" :124,
+                "member_id" :124,
+                "sinking_fund":123,
+                "repair_charges":234,
+                "municipal_tax":234,
+                "water_charges":234,
+                "parking_charges":234,
+                "NOC_charges":234,
+                "service_charges":234,
+                "N_A_taxes":234,
+                "other_charges":234,
+                "festival_fund":234,
+                
+                "interest_percent":2.3
+            }
